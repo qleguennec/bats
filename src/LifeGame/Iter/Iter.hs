@@ -1,4 +1,6 @@
-module LifeGame.Iter.Iter where
+module LifeGame.Iter.Iter (
+    next
+) where
 
 import LifeGame.Iter.Rules (ruler)
 import LifeGame.Data.CellGrid (CellGrid(..))
