@@ -1,7 +1,7 @@
-module Iter.Iter where
+module LifeGame.Iter.Iter where
 
-import Iter.Rules (ruler)
-import Data.CellGrid (CellGrid(..))
+import LifeGame.Iter.Rules (ruler)
+import LifeGame.Data.CellGrid (CellGrid(..))
 
 next :: CellGrid -> CellGrid
 next cg@(CellGrid rc xs) = CellGrid rc $ map (ruler cg) xs

@@ -1,8 +1,8 @@
 {-# LANGUAGE TypeFamilies #-}
 
-module Data.CellGrid where
+module LifeGame.Data.CellGrid where
 
-import Data.Cell
+import LifeGame.Data.Cell
 import Data.Maybe (catMaybes)
 
 import Math.Geometry.Grid
@@ -33,6 +33,7 @@ instance Grid CellGrid where
   , searchCell cg (x+1, y)
   , searchCell cg (x-1, y)]
  distance _ (Cell _ (x1, y1)) (Cell _ (x2, y2)) = abs (x2-x1) + abs (y2-y1)
+ -- We transform our Cells into Indexes (so our CellGrid into RectSquareGrid) so we can get directions
  directionTo (CellGrid rc cs) (Cell _ xy1) (Cell _ xy2) = (\rc -> directionTo rc xy1 xy2) . RectSquareGrid rc . map (\(Cell _ xy) -> xy) $  cs
  
 alives :: CellGrid -> [Cell]

@@ -1,7 +1,7 @@
-module Iter.Rules where
+module LifeGame.Iter.Rules where
 
-import Data.Cell
-import Data.CellGrid
+import LifeGame.Data.Cell
+import LifeGame.Data.CellGrid
 
 ruler :: CellGrid -> Cell -> Cell
 ruler cg

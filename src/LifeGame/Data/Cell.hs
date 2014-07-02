@@ -1,4 +1,4 @@
-module Data.Cell where
+module LifeGame.Data.Cell where
 
 data State = Alive | Dead
  deriving (Eq, Show)
