@@ -10,7 +10,7 @@ name:                bats
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.1.0.0
+version:             0.1.1.0
 
 -- A short (one-line) description of the package.
 -- synopsis:            
@@ -58,8 +58,9 @@ executable bats
   
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.7 && <4.8, random >=1.0 && <1.1
-                       , lifegame >= 0.1.4.0
+                       , lifegame >= 0.2.0.0
                        , helm >= 0.5.0  
+                       , grid >= 7.6.1
   
   -- Directories containing source files.
   hs-source-dirs:      src
