@@ -10,10 +10,10 @@ import LifeGame.Data.Cell (Cell(..), State(..))
 import LifeGame.Data.CellGrid (CellGrid(..))
 import LifeGame.Gen (Gen(..), gens)
 
-import FRP.Helm.Graphics (Form(..), move, filled, square)
+import FRP.Helm.Graphics (Form(..), move, filled, square, group)
 import FRP.Helm.Color (Color(..), white, black)
-import FRP.Helm.Animation (Frame(..))
-import FRP.Helm.Time (millisecond)
+import FRP.Helm.Animation (Frame(..), Animation, absolute)
+import FRP.Helm.Time (Time, millisecond)
 
 -- returns corresponding Color
 stToColor :: State -> Color
@@ -32,13 +32,12 @@ cellGridForm :: CellGrid -> Double -> [Form]
 cellGridForm (CellGrid _ cs) sqr = map (\c -> cellForm c sqr) cs
 
 -- For a given Gen, a square area and a time (the amount of time beetween frames),
--- returns a list of Frames of the Cells with the same time
-genFrames :: Gen -> Double -> Double -> [Frame]
-genFrames (Gen t cg) sqr t' = zip (repeat absoluteT) $ cellGridForm cg sqr
+-- returns a Frame composed of all the frames of the Cells with the same time
+genFrames :: Gen -> Double -> Double -> Frame
+genFrames (Gen t cg) sqr t' = (absoluteT, group $ cellGridForm cg sqr)
   where absoluteT = (fromIntegral t) + t'
 
 -- allGenFrames takes a CellGrid, a square area and the time beetween CellGrid Frames
--- and returns a list of frames of all the generations of the CellGrid
--- Use with care.
-allGenFrames :: CellGrid -> Double -> Double -> [Frame]
-allGenFrames cg sqr t = concat . map (\gen -> genFrames gen sqr t) $ gens cg
+-- and returns an animation of all the generations of the CellGrid
+allGenFrames :: CellGrid -> Double -> Double -> Animation
+allGenFrames cg sqr t = map (\gen -> genFrames gen sqr t) $ gens cg
